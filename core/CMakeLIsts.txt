@@ -1,0 +1,9 @@
+add_library(ANNCore STATIC 
+NeuralNetwork/Networks.hpp
+NeuralNetwork/Networks.cpp)
+
+
+
+target_include_directories(ANNCore PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(ANNCore PRIVATE Qt6::Widgets)
