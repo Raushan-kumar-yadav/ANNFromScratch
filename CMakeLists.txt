@@ -12,7 +12,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 # find library on system 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets Quick)
 
 add_subdirectory(app)
 add_subdirectory(core)
+add_subdirectory(ui)

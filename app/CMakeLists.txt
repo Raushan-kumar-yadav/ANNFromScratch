@@ -2,7 +2,10 @@
 add_executable(ANNFromScratch main.cpp)
 
 # Add library to you executable 
-target_link_libraries(ANNFromScratch PRIVATE Qt6::Widgets)
+target_link_libraries(ANNFromScratch PRIVATE Qt6::Widgets
+    Qt6::Quick 
+    ANNUi 
+    ANNCore)
 
 
 if(WIN32)
