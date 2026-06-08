@@ -2,6 +2,8 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QQmlApplicationEngine>  
+
 
 
 int main(int argc, char *argv[]) {
