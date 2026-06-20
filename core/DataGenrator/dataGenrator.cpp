@@ -12,11 +12,19 @@ std::vector<DataGenrator::Point> DataGenrator::genrateLenearData(int numPoint, f
 
 {
     std::vector<Point> pointData;
-        std::random_device rd; // genrate a single seed 
-        std::mt19937 gen(rd()); // genrate random number based on seed by rd 
+        std::random_device rd; 
+        std::mt19937 gen(rd()); 
+        std::uniform_real_distribution<float> dist(-5.0f, 5.0f);
 
-        int64_t num = gen();
+        float num = dist(gen);
+
         std::cout << num ;
+
+        for(int i=0 ; i < numPoint ; i++){
+
+            float num = dist(gen);
+            std::cout << num << std::endl;
+        }
 
         return pointData;
 }

@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 
 
     DataGenrator gen; 
-    gen.genrateLenearData(1, 2.0f, 2.0f, 2.3f);
+    gen.genrateLenearData(10, 2.0f, 2.0f, 2.3f);
 
 
     window.show();

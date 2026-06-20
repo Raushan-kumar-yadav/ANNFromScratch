@@ -15,8 +15,7 @@ if(WIN32)
 
     if(WINDEPLOYQT_EXECUTABLE)
         add_custom_command(TARGET ANNFromScratch POST_BUILD
-            # The --qmldir flag is added below to scan your QML files for dependencies
-            COMMAND ${WINDEPLOYQT_EXECUTABLE} --no-translations --no-opengl-sw --compiler-runtime --qmldir "${CMAKE_SOURCE_DIR}/ui/qml" "$<TARGET_FILE:ANNFromScratch>"
+             COMMAND ${WINDEPLOYQT_EXECUTABLE} --no-translations --no-opengl-sw --compiler-runtime --qmldir "${CMAKE_SOURCE_DIR}/ui/qml" "$<TARGET_FILE:ANNFromScratch>"
             COMMENT "Running windeployqt to scan QML and copy Qt DLLs..."
         )
     endif()
