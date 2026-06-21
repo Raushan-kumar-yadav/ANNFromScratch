@@ -3,6 +3,7 @@ add_executable(ANNFromScratch main.cpp)
 target_link_libraries(ANNFromScratch PRIVATE 
     Qt6::Widgets
     Qt6::Quick 
+    Qt6::QuickWidgets
     ANNUi 
     ANNCore
 )

@@ -1,12 +1,15 @@
 import QtQuick
-import QtQuick.Window
- import CustomGraph 1.0 
- Window {
-    width: 600
+import CustomGraph 1.0 
+
+Rectangle {
+     width: 600
     height: 400
-    visible: true
-    title: "ANN Ploter Test"
     color: "#222222"  
 
-    
+    Ploter {
+        id: customPloter
+        objectName: "myPloter"  
+        anchors.fill: parent
+        anchors.margins: 20
+    }
 }

@@ -1,7 +1,8 @@
+#pragma once 
 #include "iostream"
 #include "vector"
 #include "random"
-
+#include "dataTypes/dataTypes.hpp"
 class DataGenrator 
 {
 private:
@@ -10,14 +11,10 @@ public:
     DataGenrator();
     ~DataGenrator();
 
-    struct Point
-    {
-        float x,y;
-        int label;
-    };
+ 
     
 
-    std::vector<Point> genrateLenearData(int numPoint  , float m , float b , float noiseMagniture );
+    std::vector<Point> genrateLenearData(int numPoint  , float m , float b , float noiseMagnitude );
 };
 
 

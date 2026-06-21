@@ -5,35 +5,16 @@
 #include <QQmlApplicationEngine>  
 #include "../core/DataGenrator/dataGenrator.hpp"
 #include "../ui/components/graph/Ploter.hpp"
+#include "../ui/windows/mainWindow.hpp"
 
 
 int main(int argc, char *argv[]) {
     QApplication app(argc , argv );
 
- qmlRegisterType<Ploter>("CustomGraph", 1, 0, "Ploter");
 
-    QQmlApplicationEngine engine;
-    const QUrl url(u"qrc:/qt/qml/ANNUi/qml/components/Presentor.qml"_qs);
-    
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
-        &app, []() { QCoreApplication::exit(-1); },
-        Qt::QueuedConnection);
-        
-    engine.load(url);
+   qmlRegisterType<Ploter>("CustomGraph", 1, 0, "Ploter");
 
-    QWidget window;
-    window.setWindowTitle("ANN from scratch");
-    window.resize(300,200);
-
-    QVBoxLayout *layout = new QVBoxLayout(&window);
-    QPushButton *button = new QPushButton("It works!");
-    layout->addWidget(button);
-
-
-    DataGenrator gen; 
-    gen.genrateLenearData(10, 2.0f, 2.0f, 2.3f);
-
-
+     mainWindow window;
     window.show();
     return app.exec();
 }

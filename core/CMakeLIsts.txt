@@ -3,6 +3,7 @@ add_library(ANNCore STATIC
     DataGenrator/dataGenrator.cpp
     NeuralNetwork/Networks.hpp
     NeuralNetwork/Networks.cpp
+    dataTypes/dataTypes.hpp
 )
 
  target_include_directories(ANNCore PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

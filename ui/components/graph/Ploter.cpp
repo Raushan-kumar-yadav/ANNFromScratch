@@ -1,15 +1,24 @@
 #include "Ploter.hpp"
 #include <QSGGeometryNode>
 #include <QSGFlatColorMaterial>
+#include <QDebug>
 
 Ploter::Ploter(QQuickItem *parent) : QQuickItem(parent)
 {
-    // Tell Qt this item actually needs to be drawn
-    setFlag(ItemHasContents, true);
+     setFlag(ItemHasContents, true);
 }
 
 Ploter::~Ploter()
 {
+}
+
+void Ploter::setData(std::vector<Point> points)
+{
+    m_vertexData = points;
+
+    m_dataDirty = true;
+
+    update();
 }
 
 QSGNode *Ploter::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
@@ -56,26 +65,49 @@ void Ploter::reBuildGridLayer(QSGNode *node)
 void Ploter::reBuildDataLayer(QSGNode *node)
 {
     if(!node) return;
+    node->removeAllChildNodes(); 
 
-     node->removeAllChildNodes(); 
+    if (m_vertexData.empty()) return; 
 
-     QSGGeometryNode* geoNode = new QSGGeometryNode();
+    QSGGeometryNode* geoNode = new QSGGeometryNode();
     
-     QSGGeometry* geo = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), 1);
-    geo->setDrawingMode(QSGGeometry::DrawPoints);
-    geo->setLineWidth(5);  
+     int numVertices = m_vertexData.size() * 6;
+    QSGGeometry* geo = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), numVertices);
+    
+     geo->setDrawingMode(QSGGeometry::DrawTriangles);
 
-     geo->vertexDataAsPoint2D()[0].set(width() / 2.0f, height() / 2.0f);
+    QSGGeometry::Point2D* vertices = geo->vertexDataAsPoint2D();
+
+     float pointRadius = 3.0f; 
+    qDebug() << "Rebuilding Layer! Point Count:" << m_vertexData.size();
+    qDebug() << "Ploter Dimensions:" << width() << "x" << height();
+     for(size_t i = 0; i < m_vertexData.size(); ++i) {
+        
+        float screenX = (width() / 2.0f)  + (m_vertexData[i].x * 20.0f);
+        float screenY = (height() / 2.0f) - (m_vertexData[i].y * 20.0f); 
+
+        int vIndex = i * 6;
+
+
+        vertices[vIndex + 0].set(screenX - pointRadius, screenY - pointRadius); 
+        vertices[vIndex + 1].set(screenX - pointRadius, screenY + pointRadius); 
+        vertices[vIndex + 2].set(screenX + pointRadius, screenY - pointRadius); 
+
+
+        vertices[vIndex + 3].set(screenX + pointRadius, screenY - pointRadius); 
+        vertices[vIndex + 4].set(screenX - pointRadius, screenY + pointRadius); 
+        vertices[vIndex + 5].set(screenX + pointRadius, screenY + pointRadius); 
+    }
 
     geoNode->setGeometry(geo);
     geoNode->setFlag(QSGNode::OwnsGeometry);
 
-     auto* mat = new QSGFlatColorMaterial();
-    mat->setColor(QColor(255, 50, 50));  
+    auto* mat = new QSGFlatColorMaterial();
+    mat->setColor(QColor(255, 50, 50)); 
     geoNode->setMaterial(mat);
     geoNode->setFlag(QSGNode::OwnsMaterial);
 
-     node->appendChildNode(geoNode);
+    node->appendChildNode(geoNode);
 }
 
 void Ploter::reBuildSelectionLayer(QSGNode *node)

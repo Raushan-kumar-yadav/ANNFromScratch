@@ -14,7 +14,9 @@ qt_add_qml_module(ANNUi
  target_sources(ANNUi PRIVATE 
     components/graph/Ploter.cpp
     components/graph/Ploter.hpp
+    windows/mainWindow.hpp
+   windows/mainWindow.cpp
 )
 
 target_include_directories(ANNUi PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(ANNUi PRIVATE Qt6::Widgets Qt6::Quick Qt6::Qml ANNCore)
+target_link_libraries(ANNUi PRIVATE Qt6::Widgets Qt6::Quick Qt6::Qml Qt6::QuickWidgets ANNCore)
