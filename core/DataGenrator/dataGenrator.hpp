@@ -15,6 +15,7 @@ public:
     
 
     std::vector<Point> genrateLenearData(int numPoint  , float m , float b , float noiseMagnitude );
+    std::vector<Point> generateSpiralData(int numPoints, int classes, float noiseMagnitude ,   float twistFactor);
 };
 
 

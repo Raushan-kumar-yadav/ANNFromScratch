@@ -100,4 +100,23 @@ void mainWindow::onGenerateClicked()
             qDebug() << "ERROR: Ploter UI not found in QML tree!";
         }
     }
+    else if (type == "Spiral Data"){
+
+         float m = m_slopeInput->text().toFloat();
+        float b = m_interceptInput->text().toFloat();
+        float noise = m_noiseInput->text().toFloat();
+
+        if(m_ploter){
+
+            DataGenrator gendata;
+            auto dataset = gendata.generateSpiralData(points, 2, noise , 4.0f);
+
+            m_ploter->setData(dataset);
+
+        }else {
+            qDebug() << "ERROR: Ploter UI not found in QML tree!";
+        }
+        
+       
+    }
 }
