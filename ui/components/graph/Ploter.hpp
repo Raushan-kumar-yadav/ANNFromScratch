@@ -1,8 +1,11 @@
-#pragma once 
-#include <QObject>
-#include <QQmlEngine>
-#include <QQuickItem>
-#include <QSGNode>
+#pragma once
+
+#include <QtCore/QObject>
+#include <QtQml/QQmlEngine>
+#include <QtQuick/QQuickItem>
+#include <QtQuick/QSGNode>
+#include <vector>
+
 #include "../core/dataTypes/dataTypes.hpp"
  
 class Ploter : public QQuickItem

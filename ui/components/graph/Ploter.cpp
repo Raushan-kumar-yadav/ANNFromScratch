@@ -1,7 +1,8 @@
 #include "Ploter.hpp"
-#include <QSGGeometryNode>
-#include <QSGFlatColorMaterial>
-#include <QDebug>
+#include <QtCore/QDebug>
+#include <QtGui/QColor>
+#include <QtQuick/QSGFlatColorMaterial>
+#include <QtQuick/QSGGeometryNode>
 
 Ploter::Ploter(QQuickItem *parent) : QQuickItem(parent)
 {
