@@ -1,10 +1,14 @@
 #include "mainWindow.hpp"
-#include <QDebug>  
+#include <QDebug>
+#include <random>
+
+#include <neurolens/data/linear.hpp>
+#include <neurolens/data/spiral.hpp>
 
  
 mainWindow::mainWindow(QWidget *parent) : QWidget(parent)
 {
-    setWindowTitle("ANN Data Generator Dashboard");
+    setWindowTitle("neurolens - Data Generator");
     setMinimumSize(800, 600);
 
      QVBoxLayout* mainLayout = new QVBoxLayout(this);
@@ -51,7 +55,7 @@ mainWindow::mainWindow(QWidget *parent) : QWidget(parent)
 
     m_qmlView = new QQuickWidget();
     m_qmlView->setResizeMode(QQuickWidget::SizeRootObjectToView);  
-    m_qmlView->setSource(QUrl(u"qrc:/qt/qml/ANNUi/qml/components/Presentor.qml"_qs));
+    m_qmlView->setSource(QUrl(u"qrc:/qt/qml/NeuroLens/Viewer/qml/panels/Presentor.qml"_qs));
 
      QObject* root = m_qmlView->rootObject();
     if (root) {
@@ -92,9 +96,8 @@ void mainWindow::onGenerateClicked()
         qDebug() << "Generating Linear Data...";
 
          if (m_ploter) {
-            DataGenrator gen;
-            auto dataset = gen.genrateLenearData(points, m, b, noise);
-            
+            auto dataset = neurolens::data::make_linear(points, m, b, noise, std::random_device{}());
+
              m_ploter->setData(dataset); 
         } else {
             qDebug() << "ERROR: Ploter UI not found in QML tree!";
@@ -102,14 +105,11 @@ void mainWindow::onGenerateClicked()
     }
     else if (type == "Spiral Data"){
 
-         float m = m_slopeInput->text().toFloat();
-        float b = m_interceptInput->text().toFloat();
         float noise = m_noiseInput->text().toFloat();
 
         if(m_ploter){
 
-            DataGenrator gendata;
-            auto dataset = gendata.generateSpiralData(points, 2, noise , 4.0f);
+            auto dataset = neurolens::data::make_spiral(points, 2, noise, 4.0f, std::random_device{}());
 
             m_ploter->setData(dataset);
 

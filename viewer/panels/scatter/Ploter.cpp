@@ -13,7 +13,7 @@ Ploter::~Ploter()
 {
 }
 
-void Ploter::setData(std::vector<Point> points)
+void Ploter::setData(std::vector<neurolens::data::Point> points)
 {
     m_vertexData = points;
 

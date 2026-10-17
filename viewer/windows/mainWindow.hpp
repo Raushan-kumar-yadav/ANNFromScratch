@@ -8,8 +8,7 @@
 #include <QQuickWidget>
 #include <QSpinBox>
 #include <QLineEdit>
-#include "../ui/components/graph/Ploter.hpp"
-#include "../core/DataGenrator/dataGenrator.hpp"
+#include "panels/scatter/Ploter.hpp"
 
 class mainWindow : public QWidget
 {

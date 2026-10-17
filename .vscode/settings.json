@@ -1,5 +1,5 @@
 {
-  "cmake.configureSettings": {
-    "CMAKE_PREFIX_PATH": "C:/Qt/6.10.1/msvc2022_64"
-  }
+  "cmake.useCMakePresets": "always",
+  "C_Cpp.intelliSenseEngine": "disabled",
+  "clangd.arguments": ["--compile-commands-dir=${workspaceFolder}/build"]
 }

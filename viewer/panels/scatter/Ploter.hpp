@@ -6,7 +6,7 @@
 #include <QtQuick/QSGNode>
 #include <vector>
 
-#include "../core/dataTypes/dataTypes.hpp"
+#include <neurolens/data/point.hpp>
  
 class Ploter : public QQuickItem
 {
@@ -26,10 +26,10 @@ private:
     bool m_dataDirty = false;
     bool m_gridDirty = false; 
 
-    std::vector< Point> m_vertexData;
+    std::vector<neurolens::data::Point> m_vertexData;
 public:
      explicit Ploter(QQuickItem* parent = nullptr);    
     ~Ploter();
 
-    void setData(std::vector< Point> points);
+    void setData(std::vector<neurolens::data::Point> points);
 };
