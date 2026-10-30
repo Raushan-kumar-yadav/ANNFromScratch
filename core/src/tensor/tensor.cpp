@@ -2,23 +2,21 @@
 #include <stdexcept>
 #include <vector>
 
-namespace  {
-std::size_t numel(const std::vector<int>& shape){
-    if(shape.empty()){
-        throw std::invalid_argument("Tensor: shape must have at leat one diamenstion ");
+namespace {
+std::size_t numel(const std::vector<int>& shape) {
+    if (shape.empty()) {
+        throw std::invalid_argument("Tensor: shape must have at least one dimension");
     }
-    std::size_t n = 1 ;
-    for(auto& d : shape){
-        if(d <= 0){
+    std::size_t n = 1;
+    for (int d : shape) {
+        if (d <= 0) {
             throw std::invalid_argument("Tensor: every dimension must be > 0");
-
-            n *= static_cast<std::size_t>(d);
         }
+        n *= static_cast<std::size_t>(d);  
     }
     return n;
-
-};
-} // namespace 
+}
+}
 
 neurolens::Tensor::Tensor(std::vector<int> shape, std::vector<float> values)
     : m_shape(std::move(shape)),
